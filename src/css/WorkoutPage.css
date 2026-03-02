@@ -1,0 +1,25 @@
+.layout {
+  display: flex;  /* כל הילדים בשורה אחת */
+  gap: 25px;   /* רווח בין הילדים */
+  align-items: flex-start;  /* שולט על ציר הואי שכל השורה תהיה שווה מלמעלה */
+  padding: 24px;  /* שולט על ציר הואי  */ 
+  width: 100%;
+}
+
+.personal-list {
+  flex:0 0 400px; /* האלמנט הזה תמיד יהיה 400 לא גמיש  */
+}
+
+.personal-list img {
+  width: 100%;              /* תמונה ברוחב הכרטיס */
+  height: 100px;            /* גובה קבוע */
+  object-fit: cover;        /* חיתוך יפה בלי עיוות */
+  border-radius: 8px; 
+}
+
+.exercise-list {
+  flex: 1; /* האלמנט הזה גמיש - תביא לי את השארית של רוחב אני מתחיל מ0  */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}

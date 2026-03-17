@@ -13,8 +13,7 @@ export type WorkoutItem = Exercise & {
 }
 
 export type workout = {
-  workoutId: number
-  dayOfTheWeek: string
+  dayOfTheWeek: number
   arrayOfItems: WorkoutItem[]
 }
 

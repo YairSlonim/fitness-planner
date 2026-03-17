@@ -7,72 +7,106 @@ import DayWorkout from "../components/DayWorkout";
 //import Navbar from "../components/Navbar";
 
 function WorkoutPage() {
-  //const [exerciseList, setExerciseList] = useState<Exercise>();
-  const [weekWorkouts, setWeekWorkouts] = useState<workout[]>([]);
-  const [workout, setWorkout] = useState<WorkoutItem[]>([]);
+
+const initialWeek: workout[] = Array.from({length:7}, (_, index) =>({
+  dayOfTheWeek: index + 1,
+  arrayOfItems: []
+}))
+
+  const [weekWorkouts, setWeekWorkouts] = useState<workout[]>(initialWeek);
+  //const [workout, setWorkout] = useState<WorkoutItem[]>([]);
   const [dragItemId, setDragItemId] = useState<number | null>(null);
-  const [chooseDay, setChooseDay] = useState<string>("1")
+  const [chooseDay, setChooseDay] = useState<number>(1)
 
   function handleNewExercise(exercise: Exercise) {
-    setWorkout((prev) => {
-      const uniqId = prev.length === 0 ? 1 : Math.max(...prev.map((item) => item.item_id)) + 1;
-
-      const item: WorkoutItem = {
+    setWeekWorkouts((prev) =>(
+      prev.map((dayWorkOut) =>{
+        if(dayWorkOut.dayOfTheWeek !== chooseDay){
+          return dayWorkOut;
+        }
+        const uniqId = dayWorkOut.arrayOfItems.length === 0 ? 1 : Math.max(...dayWorkOut.arrayOfItems.map((item) => item.item_id)) + 1;
+        const item: WorkoutItem = {
         ...exercise,
         item_id: uniqId,
         sets: 0,
         reps: 0,
       };
-      return [...prev, item];
-    });
+      return { ...dayWorkOut, arrayOfItems: [...dayWorkOut.arrayOfItems,item]} 
+      })
+    ))
   }
 
   function handleDeleteFromPersonalList(id: number) {
-    setWorkout((prev) => {
-      return prev.filter((e) => e.item_id !== id);
-    });
-  }
+    setWeekWorkouts((prev) =>
+    prev.map((dayWorkOut) =>{
+      if(dayWorkOut.dayOfTheWeek !== chooseDay){
+          return dayWorkOut;
+        }
+        console.log(dayWorkOut.arrayOfItems)
+        console.log(id)
+        return {...dayWorkOut, arrayOfItems: dayWorkOut.arrayOfItems.filter((e) => e.item_id !== id)}
+    })
+  )
+   }
 
-  function updateWorkoutItem(
-    id: number,
-    field: "sets" | "reps",
-    value: number,
-  ) {
-    console.log("id " + id + " " + field);
-    setWorkout((prev) =>
-      prev.map((item) =>
-        item.item_id === id ? { ...item, [field]: value } : item,
-      ),
-    );
-  }
+   function updateWorkoutItem( id: number, field: "sets" | "reps", value: number,) {
+    setWeekWorkouts((prev) =>
+      prev.map((dayWorkOut) =>{
+        if(dayWorkOut.dayOfTheWeek !== chooseDay){
+          return dayWorkOut;
+        }
+        return {
+        ...dayWorkOut,
+        arrayOfItems: dayWorkOut.arrayOfItems.map((item) =>
+          item.item_id === id ? { ...item, [field]: value } : item
+        ),
+      };
+    })
+  )
+}
 
   function handleDrop(dropItemId: number) {
 
     if (dragItemId == null) return;
     if (dragItemId === dropItemId) return;
 
-
-    setWorkout((prev) => {
-      const copy = [...prev];
-      const firstItemIndex = copy.findIndex(e => e.item_id === dragItemId)
-      const secondItemIndex = copy.findIndex(e => e.item_id === dropItemId)
-
-      if (firstItemIndex != -1 && secondItemIndex != -1) {
+       setWeekWorkouts((prev) =>
+       prev.map((workout) =>{
+        if(workout.dayOfTheWeek !== chooseDay){
+          return workout
+        }
+        const copy = [...workout.arrayOfItems];
+        const firstItemIndex = copy.findIndex(e => e.item_id === dragItemId)
+        const secondItemIndex = copy.findIndex(e => e.item_id === dropItemId)
+         if (firstItemIndex != -1 && secondItemIndex != -1) {
         const [itemToMove] = copy.splice(firstItemIndex, 1);
         copy.splice(secondItemIndex, 0, itemToMove);
       }
-      return copy;
-    });
+      return {...workout, arrayOfItems: copy};
+       })
+      )
+    // setWorkout((prev) => {
+    //   const copy = [...prev];
+    //   const firstItemIndex = copy.findIndex(e => e.item_id === dragItemId)
+    //   const secondItemIndex = copy.findIndex(e => e.item_id === dropItemId)
+
+    //   if (firstItemIndex != -1 && secondItemIndex != -1) {
+    //     const [itemToMove] = copy.splice(firstItemIndex, 1);
+    //     copy.splice(secondItemIndex, 0, itemToMove);
+    //   }
+    //   return copy;
+    // });
     setDragItemId(null);
   }
 
   function handleDayChange(event: React.ChangeEvent<HTMLSelectElement>){
     console.log(event.target.value);
-    setChooseDay(event.target.value)
+    setChooseDay(Number(event.target.value)); 
   }
   function handleDragStart(startIndex: number) {
     setDragItemId(startIndex);
   }
+
   const selectedWorkout = weekWorkouts.find(w => w.dayOfTheWeek === chooseDay)
   const itemsForDay = selectedWorkout
   ? selectedWorkout.arrayOfItems

@@ -2,7 +2,6 @@ import exercises from "../tempExercises.json";
 import "../css/GeneralExercisesListPage.css";
 import ExerciseCard from "../components/ExerciseCard";
 
-
 export default function GeneralExercisesListPage() {
 
     const muscleGroups = ["legs", "chest", "back", "shoulders", "triceps", "biceps"];

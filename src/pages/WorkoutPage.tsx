@@ -2,26 +2,24 @@ import { useState } from "react";
 import "../css/WorkoutPage.css";
 import exercises from "../tempExercises.json";
 import ExerciseCard from "../components/ExerciseCard";
-import type { Exercise, workout, WorkoutItem } from "../types";
+import type { Exercise, Workout, WorkoutItem } from "../types";
 import DayWorkout from "../components/DayWorkout";
-//import Navbar from "../components/Navbar";
 
 function WorkoutPage() {
 
-const initialWeek: workout[] = Array.from({length:7}, (_, index) =>({
+const initialWeek: Workout[] = Array.from({length:7}, (_, index) =>({
   dayOfTheWeek: index + 1,
   arrayOfItems: []
 }))
 
-  const [weekWorkouts, setWeekWorkouts] = useState<workout[]>(initialWeek);
-  //const [workout, setWorkout] = useState<WorkoutItem[]>([]);
+  const [weekWorkouts, setWeekWorkouts] = useState<Workout[]>(initialWeek);
   const [dragItemId, setDragItemId] = useState<number | null>(null);
-  const [chooseDay, setChooseDay] = useState<number>(1)
+  const [selectedDay, setSelectedDay] = useState<number>(1)
 
   function handleNewExercise(exercise: Exercise) {
     setWeekWorkouts((prev) =>(
       prev.map((dayWorkOut) =>{
-        if(dayWorkOut.dayOfTheWeek !== chooseDay){
+        if(dayWorkOut.dayOfTheWeek !== selectedDay){
           return dayWorkOut;
         }
         const uniqId = dayWorkOut.arrayOfItems.length === 0 ? 1 : Math.max(...dayWorkOut.arrayOfItems.map((item) => item.item_id)) + 1;
@@ -39,7 +37,7 @@ const initialWeek: workout[] = Array.from({length:7}, (_, index) =>({
   function handleDeleteFromPersonalList(id: number) {
     setWeekWorkouts((prev) =>
     prev.map((dayWorkOut) =>{
-      if(dayWorkOut.dayOfTheWeek !== chooseDay){
+      if(dayWorkOut.dayOfTheWeek !== selectedDay){
           return dayWorkOut;
         }
         console.log(dayWorkOut.arrayOfItems)
@@ -52,7 +50,7 @@ const initialWeek: workout[] = Array.from({length:7}, (_, index) =>({
    function updateWorkoutItem( id: number, field: "sets" | "reps", value: number,) {
     setWeekWorkouts((prev) =>
       prev.map((dayWorkOut) =>{
-        if(dayWorkOut.dayOfTheWeek !== chooseDay){
+        if(dayWorkOut.dayOfTheWeek !== selectedDay){
           return dayWorkOut;
         }
         return {
@@ -72,42 +70,31 @@ const initialWeek: workout[] = Array.from({length:7}, (_, index) =>({
 
        setWeekWorkouts((prev) =>
        prev.map((workout) =>{
-        if(workout.dayOfTheWeek !== chooseDay){
+        if(workout.dayOfTheWeek !== selectedDay){
           return workout
         }
         const copy = [...workout.arrayOfItems];
         const firstItemIndex = copy.findIndex(e => e.item_id === dragItemId)
         const secondItemIndex = copy.findIndex(e => e.item_id === dropItemId)
-         if (firstItemIndex != -1 && secondItemIndex != -1) {
+         if (firstItemIndex !== -1 && secondItemIndex !== -1) {
         const [itemToMove] = copy.splice(firstItemIndex, 1);
         copy.splice(secondItemIndex, 0, itemToMove);
       }
+      
       return {...workout, arrayOfItems: copy};
        })
       )
-    // setWorkout((prev) => {
-    //   const copy = [...prev];
-    //   const firstItemIndex = copy.findIndex(e => e.item_id === dragItemId)
-    //   const secondItemIndex = copy.findIndex(e => e.item_id === dropItemId)
-
-    //   if (firstItemIndex != -1 && secondItemIndex != -1) {
-    //     const [itemToMove] = copy.splice(firstItemIndex, 1);
-    //     copy.splice(secondItemIndex, 0, itemToMove);
-    //   }
-    //   return copy;
-    // });
     setDragItemId(null);
   }
 
   function handleDayChange(event: React.ChangeEvent<HTMLSelectElement>){
-    console.log(event.target.value);
-    setChooseDay(Number(event.target.value)); 
+    setSelectedDay(Number(event.target.value)); 
   }
   function handleDragStart(startIndex: number) {
     setDragItemId(startIndex);
   }
 
-  const selectedWorkout = weekWorkouts.find(w => w.dayOfTheWeek === chooseDay)
+  const selectedWorkout = weekWorkouts.find(w => w.dayOfTheWeek === selectedDay)
   const itemsForDay = selectedWorkout
   ? selectedWorkout.arrayOfItems
   : [];
@@ -127,7 +114,7 @@ const initialWeek: workout[] = Array.from({length:7}, (_, index) =>({
       </div>
       <div className="personal-list">
         <h3>התוכנית שלי</h3>
-            <select name="" value={chooseDay} onChange={handleDayChange}>
+            <select name="" value={selectedDay} onChange={handleDayChange}>
             <option value="1">ראשון</option>
             <option value="2">שני</option>
             <option value="3">שלישי</option>

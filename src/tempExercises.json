@@ -63,56 +63,56 @@
         "muscleGroup": "legs"
     },
     {
-        "id":3,
+        "id":10,
         "image":"https://hips.hearstapps.com/hmg-prod/images/hdm119918mh16114-1542293707-6601c2250e01e.jpg?crop=1xw:0.84375xh;0,0.120xh",
         "name":"Bench Press",
         "howToPreform": "אני הולך הביתה",
         "muscleGroup": "chest"
     },
     {
-        "id":4,
+        "id":11,
         "image":"https://hips.hearstapps.com/hmg-prod/images/hdm119918mh16114-1542293707-6601c2250e01e.jpg?crop=1xw:0.84375xh;0,0.120xh",
         "name":"Push ups",
         "howToPreform": "אני הולך הביתה",
         "muscleGroup": "chest"
     },
     {
-        "id":5,
+        "id":12,
         "image":"https://hips.hearstapps.com/hmg-prod/images/hdm119918mh16114-1542293707-6601c2250e01e.jpg?crop=1xw:0.84375xh;0,0.120xh",
         "name":"Pull ups",
         "howToPreform": "אני הולך הביתה",
         "muscleGroup": "back"
     },
     {
-        "id":6,
+        "id":13,
         "image":"https://hips.hearstapps.com/hmg-prod/images/hdm119918mh16114-1542293707-6601c2250e01e.jpg?crop=1xw:0.84375xh;0,0.120xh",
         "name":"Overhead Presses",
         "howToPreform": "אני הולך הביתה",
         "muscleGroup": "shoulders"
     },
     {
-        "id":7,
+        "id":14,
         "image":"https://cdn.muscleandstrength.com/sites/default/files/ez-bar-skullcrusher_0.jpg",
         "name":"EZ Bar Skullcrusher",
         "howToPreform": "אני הולך הביתה",
         "muscleGroup": "triceps"
     },
     {
-        "id":8,
+        "id":15,
         "image":"https://cdn.muscleandstrength.com/sites/default/files/ez-bar-skullcrusher_0.jpg",
         "name":"Standing Barbell Curl",
         "howToPreform": "אני הולך הביתה",
         "muscleGroup": "biceps"
     },
     {
-        "id":9,
+        "id":16,
         "image":"https://hips.hearstapps.com/hmg-prod/images/hdm119918mh16114-1542293707-6601c2250e01e.jpg?crop=1xw:0.84375xh;0,0.120xh",
         "name":"moshe",
         "howToPreform": "אני הולך ה",
         "muscleGroup": "legs"
     },
     {
-        "id":10,
+        "id":17,
         "image":"https://hips.hearstapps.com/hmg-prod/images/hdm119918mh16114-1542293707-6601c2250e01e.jpg?crop=1xw:0.84375xh;0,0.120xh",
         "name":"zxcxcxc",
         "howToPreform": "אני הולך xzczxc",

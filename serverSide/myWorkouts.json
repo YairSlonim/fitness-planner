@@ -1,0 +1,41 @@
+[
+  {
+    "dayOfTheWeek": 1,
+    "arrayOfItems": [
+      {
+        "day_of_week": 1,
+        "item_id": 1,
+        "sets": 7,
+        "reps": 12,
+        "name": "Squats",
+        "muscle_group": "legs",
+        "img": "https://hips.hearstapps.com/hmg-prod/images/hdm119918mh16114-1542293707-6601c2250e01e.jpg?crop=1xw:0.84375xh;0,0.120xh",
+        "exercise_id": 1
+      }
+    ]
+  },
+  {
+    "dayOfTheWeek": 2,
+    "arrayOfItems": []
+  },
+  {
+    "dayOfTheWeek": 3,
+    "arrayOfItems": []
+  },
+  {
+    "dayOfTheWeek": 4,
+    "arrayOfItems": []
+  },
+  {
+    "dayOfTheWeek": 5,
+    "arrayOfItems": []
+  },
+  {
+    "dayOfTheWeek": 6,
+    "arrayOfItems": []
+  },
+  {
+    "dayOfTheWeek": 7,
+    "arrayOfItems": []
+  }
+]
